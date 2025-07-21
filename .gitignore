@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+
+# Logs and results
+logs/
+results/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Misc
+.DS_Store
+*.swp
+
