@@ -1,0 +1,20 @@
+initial_state:
+  x: 0.0
+  y: 0.0
+  theta: 0.0
+
+initial_covariance:
+  x: 0.1
+  y: 0.1
+  theta: 0.1
+
+process_noise:
+  x: 0.01
+  y: 0.01
+  theta: 0.01
+
+measurement_noise:
+  x: 0.5
+  y: 0.5
+
+log_file: "../localization/ekf_log.csv"
