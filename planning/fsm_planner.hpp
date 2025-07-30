@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-//Basic FSM states
+// Basic FSM states
 enum class FSMState {
     IDLE,
     GO_STRAIGHT,
@@ -15,30 +15,26 @@ enum class FSMState {
     STOP
 };
 
-struct Obstacle{
+struct Obstacle {
     double x;
     double y;
 };
 
-class FSMPlanner{
-    public: 
-        FSMPlanner();
-        
-        // Update planner with current ego state and nearby obstacles
-        void update(const Eigen::Vector3d& ego_state, const std::vector<Obstacle>& obstacles);
+class FSMPlanner {
+public:
+    FSMPlanner();
 
-        // Get the currrent planner decision/state
-        FSMState getState() const;
+    // Update planner with current ego state and nearby obstacles
+    void update(const Eigen::Vector3d& ego_state, const std::vector<Obstacle>& obstacles);
 
-        // Debug print of decision
-        std::string getStateName() const;
+    // Get the current planner decision/state
+    FSMState getCurrentState() const;
 
-    private:
-        FSMState current_state_;
+    // Debug print of decision
+    std::string getStateName() const;
 
-        //Simple logic to determine if we should stop or turn
-        bool isObstacleTooClose(const Eigen::Vector3d& ego, const std::vector<Obstacle>* obs);
+private:
+    FSMState current_state_;
 };
-
 
 #endif // FSM_PLANNER_HPP

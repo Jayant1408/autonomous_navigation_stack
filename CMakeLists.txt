@@ -27,3 +27,11 @@ add_executable(ekf_test
 )
 find_package(yaml-cpp REQUIRED)
 target_link_libraries(ekf_test Eigen3::Eigen yaml-cpp)
+
+# FSM Planner
+add_executable(fsm_test
+    planning/fsm_planner.cpp
+    planning/test_fsm.cpp
+)
+
+target_link_libraries(fsm_test Eigen3::Eigen)
