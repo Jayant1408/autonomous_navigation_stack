@@ -18,6 +18,10 @@ enum class FSMState {
 struct Obstacle {
     double x;
     double y;
+    double radius;
+
+    Obstacle() : x(0), y(0), radius(1.0) {}
+    Obstacle(double x_, double y_, double r_) : x(x_), y(y_), radius(r_) {} 
 };
 
 class FSMPlanner {
