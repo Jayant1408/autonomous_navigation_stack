@@ -2,6 +2,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <cmath>
+#include <iostream>
 
 TrajectoryGenerator::TrajectoryGenerator() {}
 
@@ -25,12 +26,38 @@ std::vector<TrajectoryPoint> TrajectoryGenerator::generateStopTrajectory(const E
 }
 
 
-void TrajectoryGenerator::saveToJson(const std::vector<TrajectoryPoint>& trajectory, const std::string& filename){
-    nlohmann::json j;
-    for(const auto& pt : trajectory)
-    {
-         j.push_back({{"x", pt.x}, {"y", pt.y}, {"heading", pt.heading}, {"velocity", pt.velocity}});
-    }
+// void TrajectoryGenerator::saveToJson(const std::vector<TrajectoryPoint>& trajectory, const std::string& filename){
+//     nlohmann::json j;
+//     for(const auto& pt : trajectory)
+//     {
+//          j.push_back({{"x", pt.x}, {"y", pt.y}, {"heading", pt.heading}, {"velocity", pt.velocity}});
+//     }
+//     std::ofstream file(filename);
+//     file << j.dump(2);
+// }
+
+void TrajectoryGenerator::saveToJson(const std::vector<TrajectoryPoint>& trajectory, const std::string& filename) {
     std::ofstream file(filename);
-    file << j.dump(2);
+    if (!file.is_open()) {
+        std::cerr << "[ERROR] Could not open " << filename << " for writing.\n";
+        return;
+    }
+
+    if (trajectory.empty()) {
+        std::cerr << "[WARNING] Attempting to write empty trajectory to JSON.\n";
+    }
+
+    nlohmann::json j = nlohmann::json::array();
+
+    for (const auto& pt : trajectory) {
+        j.push_back({
+            {"x", pt.x},
+            {"y", pt.y},
+            {"heading", pt.heading},
+            {"velocity", pt.velocity}
+        });
+    }
+
+    file << j.dump(2);  // Pretty print
+    file.close();
 }
